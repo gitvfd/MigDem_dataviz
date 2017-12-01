@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+	<link  rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body id="page">
+<div class="controlBoard">
+	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select>
+	<select class="selFilter"  id="var_migFilter" onchange="dataPicker()"></select>
+	<select class="selFilter"  id="var_eduFilter" onchange="dataPicker()"></select>
+	<select class="selFilter"  id="var_lfrpFilter" onchange="dataPicker()"></select>
+</div>
+
+<br/>
+
+<div id="toolbar">
+	<div class="button active" id="global">Global</div>
+	<div class="button " id="category">Category</div>
+</div>
+
+<br/>
+
+<div id="globalChart">
+	<div id="slidecontainer">
+		Select the Year:
+	    <output name="yearOutputName" id="yearOutputId">2015</output>
+			<img class="playBtn" id="PlayBtn" height="40vw" width="40vw" src="img/play.png" tooltip="Play the data"></img>
+			<div id="playExplanation">Play through time</div>
+
+		<!-- CHANGE PERIOD ACCORDING TO DATA -->
+
+		<input type="range" min="2015" max="2030" step="5" value="2015" class="slider" id="myRange" onchange="display()" oninput="yearOutputId.value = myRange.value">
+	</div>
+	<br/>
+	<div id="pyramidChart"></div>
+	<div id="legendChart"></div>
+	<div id="complementChart"></div>
+</div>
+<div id="categoryChart">
+	<div id="category1">Category</div>
+	<div id="category2">Category</div>
+	<div id="category3">Category</div>
+	<div id="category4">Category</div>
+	<div id="category5">Category</div>
+	<div id="category6">Category</div>
+	<div id="category7">Category</div>
+	<div id="category8">Category</div>
+	<div id="category9">Category</div>
+</div>
+<div id="pyramidTooltip" class="hidden">
+		<b><span id="categoryName">category</span></b><br/><span id="valueCategory">value</span><br/><span id="totalPopTool">measure</span>
+</div>
+<Br/>
+<div class="siteFooterBar">
+    <span class="copyright">2017 © OECD</span>
+    <a href="http://www.oecd.org" target="_blank"><img  src="img/SYMBOL_20cm.png" ></img></a>
+    <a href="https://ec.europa.eu/" target="_blank"><img  src="img/LOGO_CE_Vertical_EN_quadri_LR.png" ></img></a>
+</div>
+
+
+<script src="libs/d3.v4.min.js"></script>
+<script src="js/dataPicker.js"></script>
+<script src="js/setFilters.js"></script>
+<script src="js/display.js"></script>
+<script src="js/setupbutton.js"></script>
+<script src="js/lineChart.js"></script>
+<script src="js/catChart.js"></script>
+<script src="js/cat1Chart.js"></script>
+<script src="js/cat2Chart.js"></script>
+<script src="js/cat3Chart.js"></script>
+<script src="js/cat4Chart.js"></script>
+<script src="js/cat5Chart.js"></script>
+<script src="js/cat6Chart.js"></script>
+<script src="js/cat7Chart.js"></script>
+<script src="js/cat8Chart.js"></script>
+<script src="js/cat9Chart.js"></script>
+
+<script type="text/javascript">
+
+/** SET main variables for the visualisation**/
+	//var widthMap=document.getElementById('mapVisualisation').offsetWidth;
+	var screenSide=document.getElementById('pyramidChart').offsetWidth
+    var margin = {top: 2/100*screenSide, right: 10/100*screenSide, bottom: 2/100*screenSide, left: 10/100*screenSide};
+    var gap=2/100*screenSide;
+
+	var width=screenSide - margin.left - margin.right;
+	var height=screenSide/3;
+	var widthCatChart,marginCatChart;
+	
+    var pyramidChartSVG = d3.select("#pyramidChart").append("svg")
+					    .attr("width", screenSide )
+					    .attr("height", height)
+
+    var pyramidChart = pyramidChartSVG.append("g")
+					    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+	pyramidChartSVG.append("image")
+		.attr("x",screenSide/30)
+		.attr("y",height/4)
+		.attr("width",screenSide/18)
+		.attr("height",screenSide/18)
+		.attr("xlink:href", "img/male.svg")
+
+	pyramidChartSVG.append("image")
+		.attr("x",screenSide-screenSide/10)
+		.attr("y",height/4)
+		.attr("width",screenSide/15)
+		.attr("height",screenSide/15)
+		.attr("xlink:href", "img/female.svg")
+
+	pyramidChartSVG.append("text")
+		.attr("x",screenSide/30)
+		.attr("y",height/4)
+		.attr("dy","-0.52em")
+      	.attr("font-size", "1.5vw")
+      	.attr("fill", "#666")
+      	.attr("text-anchor", "start")
+      	.text("MALE");
+
+	pyramidChartSVG.append("text")
+		.attr("x",screenSide-screenSide/15)
+		.attr("y",height/4)
+		.attr("dy","-0.52em")
+      	.attr("font-size", "1.5vw")
+      	.attr("fill", "#666")
+      	.attr("text-anchor", "middle")
+      	.text("FEMALE");
+
+    var legendChart = d3.select("#legendChart").append("svg")
+					    .attr("width", screenSide )
+					    .attr("height", 60)
+					    .append("g")
+					    .attr("transform", "translate(" + 0 + "," + 0 + ")");
+
+
+    var compChart = d3.select("#complementChart").append("svg")
+					    .attr("width", screenSide )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	if (screenSide>600){
+		widthCatChart=(screenSide-margin.right-margin.left)/3
+		marginCatChart=margin.left/2
+	}else{
+		widthCatChart=screenSide
+		marginCatChart=margin.left;
+	}
+    
+    var cat1Chart = d3.select("#category1").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+
+    var cat2Chart = d3.select("#category2").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+    var cat3Chart = d3.select("#category3").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+    var cat4Chart = d3.select("#category4").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+    var cat5Chart = d3.select("#category5").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+    var cat6Chart = d3.select("#category6").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+    var cat7Chart = d3.select("#category7").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+    var cat8Chart = d3.select("#category8").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+    var cat9Chart = d3.select("#category9").append("svg")
+					    .attr("width", widthCatChart )
+					    .attr("height", height/2)
+					    .append("g")
+					    .attr("transform", "translate(" + marginCatChart + "," + margin.top + ")");
+
+	//SCALES PYRAMID CHART 
+	var x1 = d3.scaleLinear().range([width/2-gap,0]),
+		x2 = d3.scaleLinear().range([width/2+gap, width]);
+
+	var y = d3.scaleBand()
+	    .rangeRound([height -2*margin.bottom ,0])
+	    .paddingInner(0.05)
+	    .align(0.1);
+
+	var z = d3.scaleOrdinal()
+		.range(["#39617D","#89A1B1","#b0c0cb","#e73741","#F1878D","#F6AFB3","#0F8FD9","#6FBCE9","#9FD3F0"]);
+
+
+
+
+	//SCALES LINE CHART 
+	var xLine = d3.scaleTime()
+	    .rangeRound([0, width]);
+
+	var yLine = d3.scaleLinear()
+	    .rangeRound([height/2-2*margin.bottom, 0]);
+
+	var parseTime = d3.timeParse("%Y");
+
+	// DEFINE LINE CHART AREA 
+	var area = d3.area();
+
+	/** LOAD ALL DATA **/
+
+		var totData=[]; // previously used instead of data2use if you load all data at once
+		var dataLine;
+		var counter=0; // define counter to launch function at the end of the forEach
+		var countryList=[];
+		var yearList=[];
+		var var_migList=[];
+		var var_eduList=[];
+		var var_lfrpList=[];
+		var catList=[];
+
+		var AT=[],BE=[],CH=[],CZ=[],DK=[],ES=[],FI=[],FR=[],GR=[],HU=[],IE=[],IS=[],IT=[],LU=[],NL=[],NO=[],PL=[],PT=[],SE=[],SI=[],SK=[],UK=[];
+		var pickedCountry;
+		var data2use;
+
+	  	var age1 ;
+	  	var year0;
+	    var year1 ;
+	    var year ;
+	    var maxPop;
+
+
+		var f = d3.format(".0f");
+		var f2 = d3.format(",");
+
+		d3.csv("data/countryList.csv",function(error, data) {
+			data.forEach(function(d){
+				
+				countryList.push(d)
+
+				URL="data/"+d.ISO+".tsv";
+				d3.tsv(URL,function(error, k) {
+					k.forEach(function(v){
+							eval(d.ISO).push(v)
+							if(d.ISO=="AT"){
+								counter++; 
+	         					if (counter === k.length) {
+	             					setFilters();
+	         					}
+	         				}
+
+					})
+				})
+
+
+			});
+		});
+
+		d3.csv("data/yearList.csv",function(error, data) {
+			data.forEach(function(d){
+					yearList.push(d)
+			})
+		});
+
+		d3.csv("data/var_mig.csv",function(error, data) {
+			data.forEach(function(d){
+					var_migList.push(d)
+			})
+		});
+
+		d3.csv("data/var_edu.csv",function(error, data) {
+			data.forEach(function(d){
+					var_eduList.push(d)
+			})
+		});
+
+		d3.csv("data/var_lfrp.csv",function(error, data) {
+			data.forEach(function(d){
+					var_lfrpList.push(d)
+			})
+		});
+
+
+		d3.tsv("data/catList.tsv",function(error, data) {
+			data.forEach(function(d){
+					catList.push(d)
+			})
+		});
+
+		/**d3.tsv("data/test_data2.tsv",function(error,data){
+			  		// Compute the extent of the data set in age and years.
+	  		age1 = d3.max(data, function(d) { return d.age_gr ; }),
+	  		year0 = d3.min(data, function(d) { return d.year; }),
+	      	year1 = d3.max(data, function(d) { return d.year; }),
+	      	year = year0;
+
+
+			data.forEach(function(d){ 
+					totData.push(d)
+					counter++; 
+	         		if (counter === data.length) {
+	             		setFilters();
+	         		}
+			})
+		})**/
+setupButtons()
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51983915-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
