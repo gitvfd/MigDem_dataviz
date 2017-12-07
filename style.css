@@ -1,7 +1,39 @@
+h1{
+  font : 24px Caecilia lt bold; color:#0297C9;
+  padding: 5px 5px 0px 0px;
+  display: inline-block;
+}
 
-#pyramidChart,#legendChart,#complementChart{
+h2{
+  font : 16px TheSerif; color:#7A7A7A;
+  padding: 5px 10px 10px 0px;
+  display: inline-block;
+
+}
+
+#showlegend{padding-bottom: 5px;
+  background:#DDE9EF;
+  width:100%;
+  text-align: right; /** center if we want to have t in the middle **/
+  font : 16px TheSerif; color:#7A7A7A;
+
+}
+#legendChart{
+  background:#DDE9EF;
+  display: none;
+
+}
+
+#showlegend:hover #legendChart {
+    display: block;
+}
+
+#pyramidChart,#complementChart{
   background:#DDE9EF
 }
+
+  
+
 .axis path {
   display: none;
 }
@@ -20,14 +52,29 @@
   fill: #b4c2cb;
 }
 
+.col-md-3{
+  clear:both;
+  max-width:20%;
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.headSelector{
+  float:left;
+  margin-left: 1%;    
+  font: 300 16px Helvetica Neue ;
+}
 .selFilter{
 
   float:left;
-  margin-right:10px;
+  /**margin-right:10px;**/
   margin-bottom:10px;
+
+  max-width:95%;
+
   font-family:TheSerif, Caecilia,Georgia, serif;
   font-weight:300;
-  font-size:22px;
+  font-size:18px;
   line-height:33.2px;
   text-align:start;
   letter-spacing:normal;

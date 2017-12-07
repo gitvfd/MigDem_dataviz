@@ -4,22 +4,20 @@
 	<link  rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body id="page">
-<div class="controlBoard">
-	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select>
-	<select class="selFilter"  id="var_migFilter" onchange="dataPicker()"></select>
-	<select class="selFilter"  id="var_eduFilter" onchange="dataPicker()"></select>
-	<select class="selFilter"  id="var_lfrpFilter" onchange="dataPicker()"></select>
+<h1> Migrants and Native Active Population Evolution
+</h1>
+<h2>Play with the scenarii
+</h2>
+<div class="controlBoard">    
+    <div class="col-md-3"><span class="headSelector">Pick a country</span><br/>
+	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select></div> 
+    <div class="col-md-3"><span class="headSelector">Mig scenario</span><br/>
+	<select class="selFilter"  id="var_migFilter" onchange="dataPicker()"></select> </div> 
+    <div class="col-md-3"><span class="headSelector">Edu Scenario</span><br/>
+	<select class="selFilter"  id="var_eduFilter" onchange="dataPicker()"></select> </div> 
+    <div class="col-md-3"><span class="headSelector">lfrp scenario</span><br/>
+	<select class="selFilter"  id="var_lfrpFilter" onchange="dataPicker()"></select></div> 
 </div>
-
-<br/>
-
-<div id="toolbar">
-	<div class="button active" id="global">Global</div>
-	<div class="button " id="category">Category</div>
-</div>
-
-<br/>
-
 <div id="globalChart">
 	<div id="slidecontainer">
 		Select the Year:
@@ -33,7 +31,8 @@
 	</div>
 	<br/>
 	<div id="pyramidChart"></div>
-	<div id="legendChart"></div>
+	<div id="showlegend">Mouse over to see the legend 
+	<div id="legendChart"></div></div>
 	<div id="complementChart"></div>
 </div>
 <div id="categoryChart">
@@ -47,6 +46,12 @@
 	<div id="category8">Category</div>
 	<div id="category9">Category</div>
 </div>
+<br/>
+<div id="toolbar">
+	<div class="button active" id="global">Global</div>
+	<div class="button " id="category">Category</div>
+</div>
+
 <div id="pyramidTooltip" class="hidden">
 		<b><span id="categoryName">category</span></b><br/><span id="valueCategory">value</span><br/><span id="totalPopTool">measure</span>
 </div>
