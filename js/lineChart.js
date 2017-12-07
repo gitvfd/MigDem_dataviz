@@ -44,13 +44,13 @@ function lineChart(){
 
 	  compChart.append("g")
 	      .call(d3.axisLeft(yLine).ticks(5))
-	    .append("text")
+	    /**.append("text")
 	      .attr("fill", "#000")
 	      .attr("transform", "rotate(-90)")
 	      .attr("y", 6)
 	      .attr("dy", "0.71em")
 	      .attr("text-anchor", "end")
-	      .text("Active pop.");
+	      .text("Active pop.")**/;
 
 	  compChart.append("path")
 	      .datum(dataLine)
