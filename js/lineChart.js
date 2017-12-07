@@ -14,7 +14,6 @@ function lineChart(){
 
 	var data=data2use.filter(function(d){return (d.country==countrySel  && d.mig_variant==var_migSel && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel )});
 
-console.log(data)
 	data.forEach(function(v){
 		v.tot=parseFloat(v.c0_1)+parseFloat(v.c0_2)+parseFloat(v.c0_3)+parseFloat(v.c1_1)+parseFloat(v.c1_2)+parseFloat(v.c1_3)+parseFloat(v.c2_1)+parseFloat(v.c2_2)+parseFloat(v.c2_3)
 	})
