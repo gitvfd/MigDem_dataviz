@@ -20,7 +20,7 @@ h2{
 }
 #legendChart{
   background:#DDE9EF;
-  display: none;
+  /**display: none; Only activate if the mouse over option is activated in the index **/
 
 }
 
