@@ -40,13 +40,13 @@ function catSixChart(data){
 
 	  cat6Chart.append("g")
 	      .call(d3.axisLeft(yLineCat6).ticks(5))
-	    .append("text")
+	    /**.append("text")
 	      .attr("fill", "#000")
 	      .attr("transform", "rotate(-90)")
 	      .attr("y", 6)
 	      .attr("dy", "0.71em")
 	      .attr("text-anchor", "end")
-	      .text("Active pop.");
+	      .text("Active pop.")**/;
 
 	  cat6Chart.append("path")
 	      .datum(dataLineCat6F)

@@ -40,13 +40,13 @@ function catFourChart(data){
 
 	  cat4Chart.append("g")
 	      .call(d3.axisLeft(yLineCat4).ticks(5))
-	    .append("text")
+	    /**.append("text")
 	      .attr("fill", "#000")
 	      .attr("transform", "rotate(-90)")
 	      .attr("y", 6)
 	      .attr("dy", "0.71em")
 	      .attr("text-anchor", "end")
-	      .text("Active pop.");
+	      .text("Active pop.")**/;
 
 	  cat4Chart.append("path")
 	      .datum(dataLineCat4F)
