@@ -40,6 +40,7 @@ function catOneChart(data){
 	      .call(d3.axisBottom(xLineCat1).ticks(4));
 
 	  cat1Chart.append("g")
+	  		.attr("class",'y axis comp')
 	      .call(d3.axisLeft(yLineCat1).ticks(5))
 	    /**.append("text")
 	      .attr("fill", "#000")

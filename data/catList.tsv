@@ -1,10 +1,10 @@
 cat	label
-c0_1	Native - Low education
-c0_2	Native - Intermediate education
-c0_3	Native - High education
-c1_1	Native abroad - Low education
-c1_2	Native abroad - Intermediate education
-c1_3	Native abroad - High education
-c2_1	Foreign - Low education
-c2_2	Foreign - Intermadiate education
-c2_3	Foreign - High education
+c0_1	Native-born / Low edu.
+c0_2	Native-born / Intermediate edu.
+c0_3	Native-born / High edu.
+c1_1	EU-born immigrants / Low edu.
+c1_2	EU-born immigrants / Intermediate edu.
+c1_3	EU-born immigrants / High edu.
+c2_1	Non-EU-born immigrants / Low edu.
+c2_2	Non-EU-born immigrants / Intermediate edu.
+c2_3	Non-EU-born immigrants / High edu.

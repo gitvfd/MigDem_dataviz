@@ -39,6 +39,7 @@ function catTwoChart(data){
 	      .call(d3.axisBottom(xLineCat2).ticks(4));
 
 	  cat2Chart.append("g")
+	  		.attr("class",'y axis comp')
 	      .call(d3.axisLeft(yLineCat2).ticks(5))
 	    /**.append("text")
 	      .attr("fill", "#000")

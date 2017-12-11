@@ -8,10 +8,15 @@ legendChart.selectAll("*")
 
 
 	var countrySel = document.getElementById("countryFilter").options[document.getElementById("countryFilter").selectedIndex].value;
-	var var_migSel = document.getElementById("var_migFilter").options[document.getElementById("var_migFilter").selectedIndex].value;
+	//var var_migSel = document.getElementById("var_migNativeFilter").options[document.getElementById("var_migNativeFilter").selectedIndex].value;
   var var_eduSel = document.getElementById("var_eduFilter").options[document.getElementById("var_eduFilter").selectedIndex].value;
   var var_lfrpSel = document.getElementById("var_lfrpFilter").options[document.getElementById("var_lfrpFilter").selectedIndex].value;
+
+  var var_migSelNative = document.getElementById("var_migNativeFilter").options[document.getElementById("var_migNativeFilter").selectedIndex].value;
+  var var_migSelEU = document.getElementById("var_migEUFilter").options[document.getElementById("var_migEUFilter").selectedIndex].value;
+  var var_migSelForeign = document.getElementById("var_migForeignFilter").options[document.getElementById("var_migForeignFilter").selectedIndex].value;
   var yearSel= document.getElementById("myRange").value;
+
 
 
 
@@ -21,13 +26,37 @@ legendChart.selectAll("*")
       .attr("class", "title")
       .attr("dy", ".45em")
       .text(yearSel);**/
+  var country_data=data2use.filter(function(d){return (d.country==countrySel  && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.mig_variant==var_migSelNative)})
+  
+  var country_data2=data2use.filter(function(d){return ((d.country==countrySel  && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.mig_variant==var_migSelNative)||(d.country==countrySel  && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.mig_variant==var_migSelEU)||(d.country==countrySel  && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.mig_variant==var_migSelForeign)) });
+  
+  country_data2.forEach(function(d){
+    country_data.forEach(function(v){
+      if(d.edu_variant==v.edu_variant && d.lfpr_variant==v.lfpr_variant&& d.age_gr==v.age_gr && d.sex==v.sex && d.year==v.year){
+        if(d.mig_variant==var_migSelNative){
+          v.c0_1=d.c0_1;
+          v.c0_2=d.c0_2;
+          v.c0_3=d.c0_3;
+        }else if(d.mig_variant==var_migSelEU){
+          v.c1_1=d.c1_1;
+          v.c1_2=d.c1_2;
+          v.c1_3=d.c1_3;
+        }else if(d.mig_variant==var_migSelEU){
+          v.c2_1=d.c2_1;
+          v.c2_2=d.c2_2;
+          v.c2_3=d.c2_3;
+        }
+      }
+    })
+  })
 
-  var country_data=data2use.filter(function(d){return (d.country==countrySel  && d.mig_variant==var_migSel && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel)});
+ // var country_data=data2use.filter(function(d){return (d.country==countrySel  && d.mig_variant==var_migSel && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel)});
+
+
  
-
   var maxPop=d3.max(country_data, function(d) { return (parseFloat(d.c0_1)+parseFloat(d.c0_2)+parseFloat(d.c0_3)+parseFloat(d.c1_1)+parseFloat(d.c1_2)+parseFloat(d.c1_3)+parseFloat(d.c2_1)+parseFloat(d.c2_2)+parseFloat(d.c2_3)); });
 
-  var filtered_data=data2use.filter(function(d){return (d.country==countrySel  && d.mig_variant==var_migSel && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.year==yearSel)});
+  var filtered_data=country_data.filter(function(d){return (d.year==yearSel)});
     
 
   function unique(x) {
@@ -265,11 +294,11 @@ legendChart.selectAll("*")
   var legend = legendChart.append("g")
       .attr("font-family", "sans-serif")
       .attr("font-size", 10)
-      .attr("text-anchor", "end")
+      .attr("text-anchor", "start")
     .selectAll("g")
     .data(keys.slice().reverse())
     .enter().append("g")
-      .attr("transform", function(d, i) {  return "translate("+ ( 1+ (Math.trunc(i/3))%3)*(width/3) + "," +  (i%3)* 20 + ")"; });
+      .attr("transform", function(d, i) {  return "translate("+ (0.1*width + ( (Math.trunc(i/3))%3)*(width/3) )+ "," +  (i%3)* 20 + ")"; });
 
   legend.append("rect")
       .attr("x",  - 15)
@@ -278,7 +307,8 @@ legendChart.selectAll("*")
       .attr("fill", z);
 
   legend.append("text")
-      .attr("x",  - 24)
+      .attr("class","legendKey")
+      .attr("x",  0.015*width)
       .attr("y", 7.5)
       .attr("dy", "0.32em")
       .text(function(d) { 

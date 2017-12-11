@@ -39,6 +39,7 @@ function catEightChart(data){
 	      .call(d3.axisBottom(xLineCat8).ticks(4));
 
 	  cat8Chart.append("g")
+	  		.attr("class",'y axis comp')
 	      .call(d3.axisLeft(yLineCat8).ticks(5))
 	    /**.append("text")
 	      .attr("fill", "#000")

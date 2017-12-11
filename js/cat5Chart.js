@@ -39,6 +39,7 @@ function catFiveChart(data){
 	      .call(d3.axisBottom(xLineCat5).ticks(4));
 
 	  cat5Chart.append("g")
+	  		.attr("class",'y axis comp')
 	      .call(d3.axisLeft(yLineCat5).ticks(5))
 	    /**.append("text")
 	      .attr("fill", "#000")

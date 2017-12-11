@@ -39,6 +39,7 @@ function catThreeChart(data){
 	      .call(d3.axisBottom(xLineCat3).ticks(4));
 
 	  cat3Chart.append("g")
+	  		.attr("class",'y axis comp')
 	      .call(d3.axisLeft(yLineCat3).ticks(5))
 	    /**.append("text")
 	      .attr("fill", "#000")

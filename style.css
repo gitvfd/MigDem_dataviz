@@ -1,25 +1,38 @@
 h1{
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-bottom: 5px;
   font : 24px Caecilia lt bold; color:#0297C9;
-  padding: 5px 5px 0px 0px;
+  padding: 0px 5px 0px 0px;
   display: inline-block;
 }
 
 h2{
+  margin-bottom: 2px;
+  padding-bottom: 5px;
   font : 16px TheSerif; color:#7A7A7A;
   padding: 5px 10px 10px 0px;
   display: inline-block;
 
 }
 
-#showlegend{padding-bottom: 5px;
+/** Set up for axis labels **/
+text{
+  font: 14px Caecilia lt;
+  color: #7A7A7A;
+  fill: #7A7A7A;
+}
+
+#showlegend{
   background:#DDE9EF;
   width:100%;
   text-align: right; /** center if we want to have t in the middle **/
-  font : 16px TheSerif; color:#7A7A7A;
+  font : 16px Caecilia lt; color:#7A7A7A;
 
 }
 #legendChart{
   background:#DDE9EF;
+  font : 1.25vw Caecilia lt; color:#7A7A7A;
   /**display: none; Only activate if the mouse over option is activated in the index **/
 
 }
@@ -32,7 +45,22 @@ h2{
   background:#DDE9EF
 }
 
+.legendKey{
+  font : 1.25vw Caecilia lt; color:#7A7A7A;
+
+}
   
+.categoryChart{
+  font : 14px Caecilia lt; color:#7A7A7A;
+
+}
+
+.textCategories{
+  font-family:Helvetica Neue;
+  font-size:2vw;
+  font-weight:300;
+  fill:#666;
+}
 
 .axis path {
   display: none;
@@ -43,7 +71,29 @@ h2{
   stroke-opacity: .2;
   shape-rendering: crispEdges;
 }
+.y.axis text {
+  text-anchor:middle;
+  font-size: 1.25vw;
+}
 
+.y.axis.lineTot text {
+  text-anchor:end;
+  font-size: 1.25vw;
+}
+.x.axis text {
+  text-anchor:middle;
+  font-size: 1.25vw;
+}
+
+.y.axis.comp text {
+  text-anchor:end;
+  font-size: 1.05vw;
+}
+
+.X.axis.comp text {
+  text-anchor:end;
+  font-size: 1.15vw;
+}
 .domain{
   display:none
 }
@@ -54,7 +104,7 @@ h2{
 
 .col-md-3{
   clear:both;
-  max-width:20%;
+  max-width:17.5%;
   display: inline-block;
   margin-right: 1%;
 }
@@ -154,6 +204,8 @@ h2{
   clear:both;
   float:left;
 }
+
+
 
 #category1,#category2,#category3,#category4,#category5,#category6,#category7,#category8,#category9{
 margin:0.5%; 

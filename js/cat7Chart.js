@@ -39,6 +39,7 @@ function catSevenChart(data){
 	      .call(d3.axisBottom(xLineCat7).ticks(4));
 
 	  cat7Chart.append("g")
+	  		.attr("class",'y axis comp')
 	      .call(d3.axisLeft(yLineCat7).ticks(5))
 	    /**.append("text")
 	      .attr("fill", "#000")
