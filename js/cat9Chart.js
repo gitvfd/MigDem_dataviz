@@ -39,6 +39,7 @@ function catNineChart(data){
 	      .call(d3.axisBottom(xLineCat9).ticks(4));
 
 	  cat9Chart.append("g")
+	  		.attr("class",'y axis comp')
 	      .call(d3.axisLeft(yLineCat9).ticks(5))
 	    /**.append("text")
 	      .attr("fill", "#000")

@@ -9,10 +9,14 @@
 <h2>Play with the scenarii
 </h2>
 <div class="controlBoard">    
-    <div class="col-md-3"><span class="headSelector">Pick a country</span><br/>
-	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select></div> 
-    <div class="col-md-3"><span class="headSelector">Mig scenario</span><br/>
-	<select class="selFilter"  id="var_migFilter" onchange="dataPicker()"></select> </div> 
+    <div class="col-md-3"><span class="headSelector">Pick a country</span>
+	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select></div> <br/>
+    <div class="col-md-3"><span class="headSelector">Native migration</span><br/>
+	<select class="selFilter"  id="var_migNativeFilter" onchange="dataPicker()"></select> </div> 
+    <div class="col-md-3"><span class="headSelector">EU born migration</span><br/>
+	<select class="selFilter"  id="var_migEUFilter" onchange="dataPicker()"></select> </div> 
+    <div class="col-md-3"><span class="headSelector">Foreign born migration</span><br/>
+	<select class="selFilter"  id="var_migForeignFilter" onchange="dataPicker()"></select> </div> 
     <div class="col-md-3"><span class="headSelector">Edu Scenario</span><br/>
 	<select class="selFilter"  id="var_eduFilter" onchange="dataPicker()"></select> </div> 
     <div class="col-md-3"><span class="headSelector">lfrp scenario</span><br/>
@@ -27,7 +31,13 @@
 
 		<!-- CHANGE PERIOD ACCORDING TO DATA -->
 
-		<input type="range" min="2015" max="2030" step="5" value="2015" class="slider" id="myRange" onchange="display()" oninput="yearOutputId.value = myRange.value">
+		<input type="range" min="2015" max="2030" step="5" value="2015" class="slider" id="myRange" list="steplist" onchange="display()" oninput="yearOutputId.value = myRange.value">
+		<datalist id="steplist">
+		    <option>2015</option>
+		    <option>2020</option>
+		    <option>2025</option>
+		    <option>2030</option>
+		</datalist>
 	</div>
 	<br/>
 	<div id="pyramidChart"></div>
@@ -36,15 +46,15 @@
 	<div id="complementChart"></div>
 </div>
 <div id="categoryChart">
-	<div id="category1">Category</div>
-	<div id="category2">Category</div>
-	<div id="category3">Category</div>
-	<div id="category4">Category</div>
-	<div id="category5">Category</div>
-	<div id="category6">Category</div>
-	<div id="category7">Category</div>
-	<div id="category8">Category</div>
-	<div id="category9">Category</div>
+	<div class="categoryChart" id="category1">Native-born / Low education</div>
+	<div class="categoryChart"  id="category2">Native-born / Intermediate education</div>
+	<div class="categoryChart"  id="category3">Native-born / High education</div>
+	<div class="categoryChart"  id="category4">EU-born immigrants / Low education</div>
+	<div class="categoryChart"  id="category5">EU-born immigrants / Intermediate education</div>
+	<div class="categoryChart"  id="category6">U-born immigrants / High education</div>
+	<div class="categoryChart"  id="category7">Non-EU-born immigrants / Low education</div>
+	<div class="categoryChart"  id="category8">Non-EU-born immigrants / Intermediate education</div>
+	<div class="categoryChart"  id="category9">Non-EU-born immigrants / High education</div>
 </div>
 <br/>
 <div id="toolbar">
@@ -100,7 +110,9 @@
 					    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-	pyramidChartSVG.append("image")
+
+	/** MALE FEMALE LOGOS**/
+	/**pyramidChartSVG.append("image")
 		.attr("x",screenSide/30)
 		.attr("y",height/4)
 		.attr("width",screenSide/18)
@@ -112,23 +124,22 @@
 		.attr("y",height/4)
 		.attr("width",screenSide/15)
 		.attr("height",screenSide/15)
-		.attr("xlink:href", "img/female.svg")
+		.attr("xlink:href", "img/female.svg")**/
 
 	pyramidChartSVG.append("text")
+	.attr("class","textCategories")
 		.attr("x",screenSide/30)
 		.attr("y",height/4)
 		.attr("dy","-0.52em")
-      	.attr("font-size", "1.5vw")
-      	.attr("fill", "#666")
       	.attr("text-anchor", "start")
       	.text("MALE");
 
 	pyramidChartSVG.append("text")
+	.attr("class","textCategories")
 		.attr("x",screenSide-screenSide/15)
 		.attr("y",height/4)
 		.attr("dy","-0.52em")
-      	.attr("font-size", "1.5vw")
-      	.attr("fill", "#666")
+
       	.attr("text-anchor", "middle")
       	.text("FEMALE");
 
@@ -141,7 +152,7 @@
 
     var compChart = d3.select("#complementChart").append("svg")
 					    .attr("width", screenSide )
-					    .attr("height", height/2)
+					    .attr("height", height/3)
 					    .append("g")
 					    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -228,7 +239,7 @@
 	    .rangeRound([0, width]);
 
 	var yLine = d3.scaleLinear()
-	    .rangeRound([height/2-2*margin.bottom, 0]);
+	    .rangeRound([height/3-2*margin.bottom, 0]);
 
 	var parseTime = d3.timeParse("%Y");
 
@@ -247,7 +258,7 @@
 		var var_lfrpList=[];
 		var catList=[];
 
-		var AT=[],BE=[],CH=[],CZ=[],DK=[],ES=[],FI=[],FR=[],GR=[],HU=[],IE=[],IS=[],IT=[],LU=[],NL=[],NO=[],PL=[],PT=[],SE=[],SI=[],SK=[],UK=[];
+		var AT=[],BE=[],BG=[],CH=[],CZ=[],DE=[],DK=[],EE=[],ES=[],FI=[],FR=[],GR=[],HU=[],IE=[],IS=[],IT=[],LT=[],LU=[],LV=[],NL=[],NO=[],PL=[],PT=[],RO=[],SE=[],SI=[],SK=[],UK=[];
 		var pickedCountry;
 		var data2use;
 
