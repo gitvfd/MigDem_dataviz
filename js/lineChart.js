@@ -30,7 +30,7 @@ function lineChart(){
           v.c1_1=d.c1_1;
           v.c1_2=d.c1_2;
           v.c1_3=d.c1_3;
-        }else if(d.mig_variant==var_migSelEU){
+        }else if(d.mig_variant==var_migSelForeign){
           v.c2_1=d.c2_1;
           v.c2_2=d.c2_2;
           v.c2_3=d.c2_3;
