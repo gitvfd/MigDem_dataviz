@@ -6,6 +6,7 @@ function display(){
  .remove();
 
     
+  document.getElementById("yearOutputId").innerHTML=document.getElementById("myRange").value;
   
     var countrySel = document.getElementById("countryFilter").options[document.getElementById("countryFilter").selectedIndex].value;
 
@@ -384,8 +385,7 @@ function display(){
 
 d3.select("#PlayBtn").on("click",function(){
   var yearSel= document.getElementById("myRange").value;
-  
-      document.getElementById("yearOutputId").innerHTML=document.getElementById("myRange").value;
+  document.getElementById("yearOutputId").innerHTML=document.getElementById("myRange").value;
   //
   // CHANGE DIVISION ACCORDING TO DATA PERIODICITY
   //
