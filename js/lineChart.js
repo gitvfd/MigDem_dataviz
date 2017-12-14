@@ -4,7 +4,6 @@ function lineChart(){
 	compChart.selectAll("*")
 		.remove();
 
-console.log(data2use_Nat)
 
     var countrySel = document.getElementById("countryFilter").options[document.getElementById("countryFilter").selectedIndex].value;
 
@@ -16,58 +15,12 @@ console.log(data2use_Nat)
     var yearSel= document.getElementById("myRange").value;
 
     var data=[];   
-/**    var tempNat=[];
-    var tempEU=[];
-    var tempForeign=[];
 
-data2use_Nat.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==NativemigSel)}).forEach(function(d){
-  tempNat.push(d);
-})
-data2use_EU.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==EUmigSel)}).forEach(function(d){
-  tempEU.push(d);
-})
-data2use_For.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==ForeignmigSel)}).forEach(function(d){
-  tempForeign.push(d);
-})**/
 var tempNat=data2use_Nat.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==NativemigSel)})
 var tempEU=data2use_EU.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==EUmigSel)})
 var tempForeign=data2use_For.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==ForeignmigSel)})
-    /**if(NativemigSel==EUmigSel && NativemigSel==ForeignmigSel){
-      console.log("case1")
-        data=tempNat;
-    }
-    else if(NativemigSel==EUmigSel && NativemigSel!=ForeignmigSel){
-      console.log("case2")
-      
-      tempNat.forEach(function(v){
-        tempForeign.forEach(function(d){
-          if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
-            v.c2_1=d.c2_1;
-            v.c2_2=d.c2_2;
-            v.c2_3=d.c2_3;     
-            v.var_mig_Foreign=ForeignmigSel;
-          }
-        })
-        data.push(v)
-      })
-    }
-    else if(NativemigSel!=EUmigSel && NativemigSel==ForeignmigSel){
-      console.log("case3")
-      
-      tempNat.forEach(function(v){
-        tempEU.forEach(function(d){
-          if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
-              v.c1_1=d.c1_1;
-              v.c1_2=d.c1_2;
-              v.c1_3=d.c1_3;     
-              v.var_mig_EU=EUmigSel;
-          }
-        })
-        data.push(v)
-      })
-    }
-    else{**/
-      console.log("case4")
+  
+
       tempNat.forEach(function(v){
         tempEU.forEach(function(d){
           if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
@@ -87,9 +40,8 @@ var tempForeign=data2use_For.filter(function(d){return (d.edu_variant==eduSel &&
         })
         data.push(v)
       })
-    /**}**/
-	//var data=data2use.filter(function(d){return (d.country==countrySel  && d.mig_variant==var_migSel && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel )});
-
+    
+    
 	data.forEach(function(v){
 		v.tot=parseFloat(v.c0_1)+parseFloat(v.c0_2)+parseFloat(v.c0_3)+parseFloat(v.c1_1)+parseFloat(v.c1_2)+parseFloat(v.c1_3)+parseFloat(v.c2_1)+parseFloat(v.c2_2)+parseFloat(v.c2_3)
 	})
