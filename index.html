@@ -10,16 +10,20 @@
 </h2>
 <div class="controlBoard">    
     <div class="col-md-3"><span class="headSelector">Pick a country</span>
-	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select></div> <br/>
-    <div class="col-md-3"><span class="headSelector">Native migration</span><br/>
+	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select></div> 
+	<br/>
+    <div class="col-md-3"><span class="headSelector">Native</span><br/>
 	<select class="selFilter"  id="var_migNativeFilter" onchange="dataPicker()"></select> </div> 
-    <div class="col-md-3"><span class="headSelector">EU born migration</span><br/>
+    
+    <div class="col-md-3"><span class="headSelector">EU-born</span><br/>
 	<select class="selFilter"  id="var_migEUFilter" onchange="dataPicker()"></select> </div> 
-    <div class="col-md-3"><span class="headSelector">Foreign born migration</span><br/>
+    
+    <div class="col-md-3"><span class="headSelector">Non-EU-born</span><br/>
 	<select class="selFilter"  id="var_migForeignFilter" onchange="dataPicker()"></select> </div> 
-    <div class="col-md-3"><span class="headSelector">Edu Scenario</span><br/>
+    
+    <div class="col-md-3"><span class="headSelector">Education Level</span><br/>
 	<select class="selFilter"  id="var_eduFilter" onchange="dataPicker()"></select> </div> 
-    <div class="col-md-3"><span class="headSelector">lfrp scenario</span><br/>
+    <div class="col-md-3"><span class="headSelector">Labour Force population</span><br/>
 	<select class="selFilter"  id="var_lfrpFilter" onchange="dataPicker()"></select></div> 
 </div>
 <div id="globalChart">
@@ -51,7 +55,7 @@
 	<div class="categoryChart"  id="category3">Native-born / High education</div>
 	<div class="categoryChart"  id="category4">EU-born immigrants / Low education</div>
 	<div class="categoryChart"  id="category5">EU-born immigrants / Intermediate education</div>
-	<div class="categoryChart"  id="category6">U-born immigrants / High education</div>
+	<div class="categoryChart"  id="category6">EU-born immigrants / High education</div>
 	<div class="categoryChart"  id="category7">Non-EU-born immigrants / Low education</div>
 	<div class="categoryChart"  id="category8">Non-EU-born immigrants / Intermediate education</div>
 	<div class="categoryChart"  id="category9">Non-EU-born immigrants / High education</div>
@@ -258,9 +262,16 @@
 		var var_lfrpList=[];
 		var catList=[];
 
-		var AT=[],BE=[],BG=[],CH=[],CZ=[],DE=[],DK=[],EE=[],ES=[],FI=[],FR=[],GR=[],HU=[],IE=[],IS=[],IT=[],LT=[],LU=[],LV=[],NL=[],NO=[],PL=[],PT=[],RO=[],SE=[],SI=[],SK=[],UK=[];
+		var AT_NAT=[],BE_NAT=[],BG_NAT=[],CH_NAT=[],CZ_NAT=[],DE_NAT=[],DK_NAT=[],EE_NAT=[],ES_NAT=[],FI_NAT=[],FR_NAT=[],GR_NAT=[],HU_NAT=[],IE_NAT=[],IS_NAT=[],IT_NAT=[],LT_NAT=[],LU_NAT=[],LV_NAT=[],NL_NAT=[],NO_NAT=[],PL_NAT=[],PT_NAT=[],RO_NAT=[],SE_NAT=[],SI_NAT=[],SK_NAT=[],UK_NAT=[];
+		
+		var AT_EU=[],BE_EU=[],BG_EU=[],CH_EU=[],CZ_EU=[],DE_EU=[],DK_EU=[],EE_EU=[],ES_EU=[],FI_EU=[],FR_EU=[],GR_EU=[],HU_EU=[],IE_EU=[],IS_EU=[],IT_EU=[],LT_EU=[],LU_EU=[],LV_EU=[],NL_EU=[],NO_EU=[],PL_EU=[],PT_EU=[],RO_EU=[],SE_EU=[],SI_EU=[],SK_EU=[],UK_EU=[];
+		
+		var AT_FOR=[],BE_FOR=[],BG_FOR=[],CH_FOR=[],CZ_FOR=[],DE_FOR=[],DK_FOR=[],EE_FOR=[],ES_FOR=[],FI_FOR=[],FR_FOR=[],GR_FOR=[],HU_FOR=[],IE_FOR=[],IS_FOR=[],IT_FOR=[],LT_FOR=[],LU_FOR=[],LV_FOR=[],NL_FOR=[],NO_FOR=[],PL_FOR=[],PT_FOR=[],RO_FOR=[],SE_FOR=[],SI_FOR=[],SK_FOR=[],UK_FOR=[];
 		var pickedCountry;
 		var data2use;
+		var data2use_Nat;
+		var data2use_EU;
+		var data2use_For;
 
 	  	var age1 ;
 	  	var year0;
@@ -276,11 +287,38 @@
 			data.forEach(function(d){
 				
 				countryList.push(d)
-
-				URL="data/"+d.ISO+".tsv";
-				d3.tsv(URL,function(error, k) {
+				
+				URLnat="data/"+d.ISO+"_Nat.tsv";
+				URLeu="data/"+d.ISO+"_EU.tsv";
+				URLfor="data/"+d.ISO+"_For.tsv";
+				
+				d3.tsv(URLnat,function(error, k) {
 					k.forEach(function(v){
-							eval(d.ISO).push(v)
+							var nameNat =d.ISO+"_NAT"
+							eval(nameNat).push(v)
+							if(d.ISO=="AT"){
+								//counter++; 
+	         					/**if (counter === k.length) {
+	             					setFilters();
+	         					}**/
+	         				}
+
+					})
+				})
+				d3.tsv(URLeu,function(error, k) {
+					k.forEach(function(v){
+							var nameEU =d.ISO+"_EU"
+							eval(nameEU).push(v)
+							if(d.ISO=="AT"){
+								//counter++; 
+	         				}
+
+					})
+				})
+				d3.tsv(URLfor,function(error, k) {
+					k.forEach(function(v){
+							var nameFOR =d.ISO+"_FOR"
+							eval(nameFOR).push(v)
 							if(d.ISO=="AT"){
 								counter++; 
 	         					if (counter === k.length) {
@@ -290,7 +328,7 @@
 
 					})
 				})
-
+				
 
 			});
 		});
@@ -306,6 +344,7 @@
 					var_migList.push(d)
 			})
 		});
+
 
 		d3.csv("data/var_edu.csv",function(error, data) {
 			data.forEach(function(d){
@@ -342,6 +381,7 @@
 	         		}
 			})
 		})**/
+
 setupButtons()
 
 </script>

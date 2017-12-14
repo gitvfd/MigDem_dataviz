@@ -51,11 +51,11 @@ function setFilters(){
 
     document.getElementById("countryFilter").value="AT";
     //document.getElementById("yearFilter").value="2015";
-    document.getElementById("var_migNativeFilter").value="0";
-    document.getElementById("var_migEUFilter").value="0";
-    document.getElementById("var_migForeignFilter").value="0";
-    document.getElementById("var_eduFilter").value="0";
-    document.getElementById("var_lfrpFilter").value="0";
+    document.getElementById("var_migNativeFilter").value="1";
+    document.getElementById("var_migEUFilter").value="1";
+    document.getElementById("var_migForeignFilter").value="1";
+    document.getElementById("var_eduFilter").value="1";
+    document.getElementById("var_lfrpFilter").value="1";
        
 	
     dataPicker();
