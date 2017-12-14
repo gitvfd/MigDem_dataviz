@@ -283,6 +283,40 @@
 		var f = d3.format(".0f");
 		var f2 = d3.format(",");
 
+
+		d3.csv("data/yearList.csv",function(error, data) {
+			data.forEach(function(d){
+					yearList.push(d)
+			})
+		});
+
+		d3.csv("data/var_mig.csv",function(error, data) {
+			data.forEach(function(d){
+					var_migList.push(d)
+			})
+		});
+
+
+		d3.csv("data/var_edu.csv",function(error, data) {
+			data.forEach(function(d){
+					var_eduList.push(d)
+			})
+		});
+
+		d3.csv("data/var_lfrp.csv",function(error, data) {
+			data.forEach(function(d){
+					var_lfrpList.push(d)
+			})
+		});
+
+
+		d3.tsv("data/catList.tsv",function(error, data) {
+			data.forEach(function(d){
+					catList.push(d)
+			})
+		});
+		
+
 		d3.csv("data/countryList.csv",function(error, data) {
 			data.forEach(function(d){
 				
@@ -333,37 +367,6 @@
 			});
 		});
 
-		d3.csv("data/yearList.csv",function(error, data) {
-			data.forEach(function(d){
-					yearList.push(d)
-			})
-		});
-
-		d3.csv("data/var_mig.csv",function(error, data) {
-			data.forEach(function(d){
-					var_migList.push(d)
-			})
-		});
-
-
-		d3.csv("data/var_edu.csv",function(error, data) {
-			data.forEach(function(d){
-					var_eduList.push(d)
-			})
-		});
-
-		d3.csv("data/var_lfrp.csv",function(error, data) {
-			data.forEach(function(d){
-					var_lfrpList.push(d)
-			})
-		});
-
-
-		d3.tsv("data/catList.tsv",function(error, data) {
-			data.forEach(function(d){
-					catList.push(d)
-			})
-		});
 
 		/**d3.tsv("data/test_data2.tsv",function(error,data){
 			  		// Compute the extent of the data set in age and years.
