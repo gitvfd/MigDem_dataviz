@@ -22,7 +22,6 @@ function dataPicker(){
 		data2use_EU = eval(countrySel_EU);
 		data2use_For = eval(countrySel_FOR);
 
-console.log(data2use_Nat)
 	/**var test=[];
 	  data2use.forEach(function(v){
 		  data2use.forEach(function(d){
@@ -39,8 +38,8 @@ console.log(data2use_Nat)
 	  		year0 = d3.min(data2use_Nat, function(d) { return d.year; }),
 	      	year1 = d3.max(data2use_Nat, function(d) { return d.year; }),
 	      	year = year0;
-
-	  lineChart();
+	
+	lineChart();
 
 	}
 	else

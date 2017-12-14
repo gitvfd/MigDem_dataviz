@@ -20,58 +20,12 @@ function display(){
 
 
     var country_data=[];   
-    /**var tempcountryNat=[];
-    var tempcountryEU=[];
-    var tempcountryForeign=[];
-
-    data2use_Nat.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==NativemigSel)}).forEach(function(d){
-      tempcountryNat.push(d);
-    })
-    data2use_EU.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==EUmigSel)}).forEach(function(d){
-      tempcountryEU.push(d);
-    })
-    data2use_For.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==ForeignmigSel)}).forEach(function(d){
-      tempcountryForeign.push(d);
-    })**/
+    
     var tempcountryNat=data2use_Nat.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==NativemigSel)});
     var tempcountryEU=data2use_EU.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==EUmigSel)});
     var tempcountryForeign=data2use_For.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==ForeignmigSel)});
 
-    /**if(NativemigSel==EUmigSel && NativemigSel==ForeignmigSel){
-      console.log("case1")
-        country_data=tempcountryNat;
-    }
-    else if(NativemigSel==EUmigSel && NativemigSel!=ForeignmigSel){
-      console.log("case2")
-      
-      tempcountryNat.forEach(function(v){
-        tempcountryForeign.forEach(function(d){
-          if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
-            v.c2_1=d.c2_1;
-            v.c2_2=d.c2_2;
-            v.c2_3=d.c2_3;     
-            v.var_mig_Foreign=ForeignmigSel;
-          }
-        })
-        country_data.push(v)
-      })
-    }
-    else if(NativemigSel!=EUmigSel && NativemigSel==ForeignmigSel){
-      console.log("case3")
-      
-      tempcountryNat.forEach(function(v){
-        tempcountryEU.forEach(function(d){
-          if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
-              v.c1_1=d.c1_1;
-              v.c1_2=d.c1_2;
-              v.c1_3=d.c1_3;     
-              v.var_mig_EU=EUmigSel;
-          }
-        })
-        country_data.push(v)
-      })
-    }
-    else{**/
+   
       tempcountryNat.forEach(function(v){
         tempcountryEU.forEach(function(d){
           if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
@@ -91,7 +45,6 @@ function display(){
         })
         country_data.push(v)
       })
-    /**}**/
  
   var maxPop=d3.max(country_data, function(d) { return (parseFloat(d.c0_1)+parseFloat(d.c0_2)+parseFloat(d.c0_3)+parseFloat(d.c1_1)+parseFloat(d.c1_2)+parseFloat(d.c1_3)+parseFloat(d.c2_1)+parseFloat(d.c2_2)+parseFloat(d.c2_3)); });
   var filtered_data=country_data.filter(function(d){return (d.year==yearSel)});
