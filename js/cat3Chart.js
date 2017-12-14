@@ -40,7 +40,7 @@ function catThreeChart(data){
 
 	  cat3Chart.append("g")
 	  		.attr("class",'y axis comp')
-	      .call(d3.axisLeft(yLineCat3).ticks(5))
+	      .call(d3.axisLeft(yLineCat3).ticks(4))
 	    /**.append("text")
 	      .attr("fill", "#000")
 	      .attr("transform", "rotate(-90)")

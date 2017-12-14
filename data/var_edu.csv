@@ -1,5 +1,5 @@
 code,label
-0,"same education level"
-1,"by 2030,40% of 30-34 have higher edu level"
-2,"by 2020,40% of 30-34 have higher edu level"
-3,"by 2020, XX% of 30-34 have higher edu level"
+1,"Baseline"
+2,"Low education"
+3,"Medium education"
+4,"High education"

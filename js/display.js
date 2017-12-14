@@ -1,71 +1,108 @@
 function display(){
+  
  pyramidChart.selectAll("*")
  .remove();
-legendChart.selectAll("*")
+ legendChart.selectAll("*")
  .remove();
 
-
-
-
-	var countrySel = document.getElementById("countryFilter").options[document.getElementById("countryFilter").selectedIndex].value;
-	//var var_migSel = document.getElementById("var_migNativeFilter").options[document.getElementById("var_migNativeFilter").selectedIndex].value;
-  var var_eduSel = document.getElementById("var_eduFilter").options[document.getElementById("var_eduFilter").selectedIndex].value;
-  var var_lfrpSel = document.getElementById("var_lfrpFilter").options[document.getElementById("var_lfrpFilter").selectedIndex].value;
-
-  var var_migSelNative = document.getElementById("var_migNativeFilter").options[document.getElementById("var_migNativeFilter").selectedIndex].value;
-  var var_migSelEU = document.getElementById("var_migEUFilter").options[document.getElementById("var_migEUFilter").selectedIndex].value;
-  var var_migSelForeign = document.getElementById("var_migForeignFilter").options[document.getElementById("var_migForeignFilter").selectedIndex].value;
-  var yearSel= document.getElementById("myRange").value;
-
-
-
-
-
-  // A label for the current year.
-  /**var titleYear = pyramidChart.append("text")
-      .attr("class", "title")
-      .attr("dy", ".45em")
-      .text(yearSel);**/
-  var country_data=data2use.filter(function(d){return (d.country==countrySel  && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.mig_variant==var_migSelNative)})
+    
   
-  var country_data2=data2use.filter(function(d){return ((d.country==countrySel  && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.mig_variant==var_migSelNative)||(d.country==countrySel  && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.mig_variant==var_migSelEU)||(d.country==countrySel  && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel && d.mig_variant==var_migSelForeign)) });
-  
-  country_data2.forEach(function(d){
-    country_data.forEach(function(v){
-      if(d.edu_variant==v.edu_variant && d.lfpr_variant==v.lfpr_variant&& d.age_gr==v.age_gr && d.sex==v.sex && d.year==v.year){
-        if(d.mig_variant==var_migSelNative){
-          v.c0_1=d.c0_1;
-          v.c0_2=d.c0_2;
-          v.c0_3=d.c0_3;
-        }else if(d.mig_variant==var_migSelEU){
-          v.c1_1=d.c1_1;
-          v.c1_2=d.c1_2;
-          v.c1_3=d.c1_3;
-        }else if(d.mig_variant==var_migSelForeign){
-          v.c2_1=d.c2_1;
-          v.c2_2=d.c2_2;
-          v.c2_3=d.c2_3;
-        }
-      }
+    var countrySel = document.getElementById("countryFilter").options[document.getElementById("countryFilter").selectedIndex].value;
+
+    var eduSel = document.getElementById("var_eduFilter").options[document.getElementById("var_eduFilter").selectedIndex].value;
+    var lfrpSel = document.getElementById("var_lfrpFilter").options[document.getElementById("var_lfrpFilter").selectedIndex].value;
+    var NativemigSel = document.getElementById("var_migNativeFilter").options[document.getElementById("var_migNativeFilter").selectedIndex].value;
+    var EUmigSel = document.getElementById("var_migEUFilter").options[document.getElementById("var_migEUFilter").selectedIndex].value;
+    var ForeignmigSel = document.getElementById("var_migForeignFilter").options[document.getElementById("var_migForeignFilter").selectedIndex].value;
+    var yearSel= document.getElementById("myRange").value;
+
+
+
+    var country_data=[];   
+    /**var tempcountryNat=[];
+    var tempcountryEU=[];
+    var tempcountryForeign=[];
+
+    data2use_Nat.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==NativemigSel)}).forEach(function(d){
+      tempcountryNat.push(d);
     })
-  })
+    data2use_EU.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==EUmigSel)}).forEach(function(d){
+      tempcountryEU.push(d);
+    })
+    data2use_For.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==ForeignmigSel)}).forEach(function(d){
+      tempcountryForeign.push(d);
+    })**/
+    var tempcountryNat=data2use_Nat.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==NativemigSel)});
+    var tempcountryEU=data2use_EU.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==EUmigSel)});
+    var tempcountryForeign=data2use_For.filter(function(d){return (d.edu_variant==eduSel && d.lfpr_variant==lfrpSel && d.mig_variant==ForeignmigSel)});
 
- // var country_data=data2use.filter(function(d){return (d.country==countrySel  && d.mig_variant==var_migSel && d.edu_variant==var_eduSel && d.lfpr_variant==var_lfrpSel)});
-
-
+    /**if(NativemigSel==EUmigSel && NativemigSel==ForeignmigSel){
+      console.log("case1")
+        country_data=tempcountryNat;
+    }
+    else if(NativemigSel==EUmigSel && NativemigSel!=ForeignmigSel){
+      console.log("case2")
+      
+      tempcountryNat.forEach(function(v){
+        tempcountryForeign.forEach(function(d){
+          if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
+            v.c2_1=d.c2_1;
+            v.c2_2=d.c2_2;
+            v.c2_3=d.c2_3;     
+            v.var_mig_Foreign=ForeignmigSel;
+          }
+        })
+        country_data.push(v)
+      })
+    }
+    else if(NativemigSel!=EUmigSel && NativemigSel==ForeignmigSel){
+      console.log("case3")
+      
+      tempcountryNat.forEach(function(v){
+        tempcountryEU.forEach(function(d){
+          if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
+              v.c1_1=d.c1_1;
+              v.c1_2=d.c1_2;
+              v.c1_3=d.c1_3;     
+              v.var_mig_EU=EUmigSel;
+          }
+        })
+        country_data.push(v)
+      })
+    }
+    else{**/
+      tempcountryNat.forEach(function(v){
+        tempcountryEU.forEach(function(d){
+          if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
+              v.c1_1=d.c1_1;
+              v.c1_2=d.c1_2;
+              v.c1_3=d.c1_3;     
+              v.var_mig_EU=EUmigSel;
+          }
+        })
+        tempcountryForeign.forEach(function(d){
+          if(v.edu_variant==d.edu_variant && v.lfpr_variant==d.lfpr_variant&& v.age_gr==d.age_gr && v.sex==d.sex && v.year==d.year){
+              v.c2_1=d.c2_1;
+              v.c2_2=d.c2_2;
+              v.c2_3=d.c2_3;     
+              v.var_mig_Foreign=ForeignmigSel;
+          }
+        })
+        country_data.push(v)
+      })
+    /**}**/
  
   var maxPop=d3.max(country_data, function(d) { return (parseFloat(d.c0_1)+parseFloat(d.c0_2)+parseFloat(d.c0_3)+parseFloat(d.c1_1)+parseFloat(d.c1_2)+parseFloat(d.c1_3)+parseFloat(d.c2_1)+parseFloat(d.c2_2)+parseFloat(d.c2_3)); });
-
   var filtered_data=country_data.filter(function(d){return (d.year==yearSel)});
     
 
   function unique(x) {
-      return x.reverse().filter(function (e, i, x) {return x.indexOf(e, i+1) === -1;}).reverse();
+      return x.reverse().filter(function (e, i, x) {return x.indexOf(e, i+1) 
+       -1;}).reverse();
   }
 
  // var keys = data.columns.slice(1);
   var keys=["c0_1","c0_2","c0_3","c1_1","c1_2","c1_3","c2_1","c2_2","c2_3"];
-
 
   //data.sort(function(a, b) { return b.total - a.total; });
 
@@ -259,7 +296,7 @@ legendChart.selectAll("*")
   });**/
 
 
-  function update() {
+  /**function update() {
     //if (!(year in totData)) return;
     titleYear.text(year);
     document.getElementById("myRange").value=year;
@@ -280,7 +317,7 @@ legendChart.selectAll("*")
           .attr("x", function(d) { return x1(d[1][1]); })
           .attr("width", function(d) { return x1(d[0][0]) - x1(d[1][1]); });
 
-  }
+  }**/
 
 
   /**
@@ -348,6 +385,7 @@ legendChart.selectAll("*")
 d3.select("#PlayBtn").on("click",function(){
   var yearSel= document.getElementById("myRange").value;
   
+      document.getElementById("yearOutputId").innerHTML=document.getElementById("myRange").value;
   //
   // CHANGE DIVISION ACCORDING TO DATA PERIODICITY
   //
@@ -358,7 +396,7 @@ d3.select("#PlayBtn").on("click",function(){
       document.getElementById("myRange").value=parseFloat(tempYear)+5;
       document.getElementById("yearOutputId").innerHTML=parseFloat(tempYear)+5;
       count=count-1;
-      display();
+      dataPicker();
       run();
   }
 

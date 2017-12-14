@@ -41,7 +41,7 @@ function catOneChart(data){
 
 	  cat1Chart.append("g")
 	  		.attr("class",'y axis comp')
-	      .call(d3.axisLeft(yLineCat1).ticks(5))
+	      .call(d3.axisLeft(yLineCat1).ticks(4))
 	    /**.append("text")
 	      .attr("fill", "#000")
 	      .attr("transform", "rotate(-90)")

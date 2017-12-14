@@ -123,7 +123,7 @@ text{
 
   max-width:95%;
 
-  font-family:TheSerif, Caecilia,Georgia, serif;
+  font-family:Caecilia,Georgia, serif;
   font-weight:300;
   font-size:18px;
   line-height:33.2px;
@@ -165,7 +165,7 @@ text{
   padding: 5px 20px 5px 20px;
   cursor: pointer;
   text-align: center;
-  font: 16px  TheSerif, Helvetica, Arial, sans-serif;
+  font: 16px   Helvetica, Arial, sans-serif;
   font-weight:300;
   float:left;
   margin: 2px 5px 2px 5px;
@@ -267,9 +267,6 @@ margin:0.5%;
     opacity: 1;
 }
 
-
-
-
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -284,9 +281,11 @@ margin:0.5%;
     width: 30px;
     height: 30px;
     background: #666666;
+     
     /**background: #0297C9;**/
     cursor: pointer;
 }
+
 
 #yearOutputId{
   display:inline-block;
@@ -319,7 +318,7 @@ margin-left: 10%;
     /* customizable */
     transition: all 0.15s ease;
     padding: 10px;
-    color: #575757;font-family:TheSerif;
+    color: #575757;font-family:Caecilia,Georgia, serif;
   font-size: 12px;
     border-radius: 10px;
     box-shadow: 2px 2px 1px silver;    
