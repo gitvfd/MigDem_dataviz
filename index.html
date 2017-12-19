@@ -4,34 +4,40 @@
 	<link  rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body id="page">
-<h1> Migrants and Native Active Population Evolution
+<h1>  Projections of working-age and active population by education and place of birth 
 </h1>
-<h2>Play with the scenarii
-</h2>
+<h2>2015-2030</h2>
+<div class="intro">What will the European labour force look like in 2030? Choose among the projection variants and discover the future population pyramid
+</div>
 <div class="controlBoard">    
-    <div class="col-md-3"><span class="headSelector">Pick a country</span>
+    <div class="col-md-3"><span class="headSelector">Select a country</span>
 	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select></div> 
 	<br/>
-    <div class="col-md-3"><span class="headSelector">Native</span><br/>
-	<select class="selFilter"  id="var_migNativeFilter" onchange="dataPicker()"></select> </div> 
-    
-    <div class="col-md-3"><span class="headSelector">EU-born</span><br/>
-	<select class="selFilter"  id="var_migEUFilter" onchange="dataPicker()"></select> </div> 
-    
-    <div class="col-md-3"><span class="headSelector">Non-EU-born</span><br/>
-	<select class="selFilter"  id="var_migForeignFilter" onchange="dataPicker()"></select> </div> 
+
+    <div class="col-md-2"><span class="headSelector-1">Net migration</span><br/>
+
+	    <div class="col-md-2-1"><span class="headSelector">Native</span><br/>
+		<select class="selFilter"  id="var_migNativeFilter" onchange="dataPicker()"></select> </div> 
+	    
+	    <div class="col-md-2-1"><span class="headSelector">EU-born</span><br/>
+		<select class="selFilter"  id="var_migEUFilter" onchange="dataPicker()"></select> </div> 
+	    
+	    <div class="col-md-2-1"><span class="headSelector">Non-EU-born</span><br/>
+		<select class="selFilter"  id="var_migForeignFilter" onchange="dataPicker()"></select> </div> 
+
+	</div>
     
     <div class="col-md-3"><span class="headSelector">Education Level</span><br/>
 	<select class="selFilter"  id="var_eduFilter" onchange="dataPicker()"></select> </div> 
-    <div class="col-md-3"><span class="headSelector">Labour Force population</span><br/>
+    <div class="col-md-3"><span class="headSelector">Labour Force participation</span><br/>
 	<select class="selFilter"  id="var_lfrpFilter" onchange="dataPicker()"></select></div> 
 </div>
 <div id="globalChart">
 	<div id="slidecontainer">
-		Select the Year:
+		Select a Year:
 	    <output name="yearOutputName" id="yearOutputId">2015</output>
 			<img class="playBtn" id="PlayBtn" height="40vw" width="40vw" src="img/play.png" tooltip="Play the data"></img>
-			<div id="playExplanation">Play through time</div>
+			<div id="playExplanation">Start simulation</div>
 
 		<!-- CHANGE PERIOD ACCORDING TO DATA -->
 
