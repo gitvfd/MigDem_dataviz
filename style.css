@@ -266,6 +266,14 @@ margin:0.5%;
     margin-top:5%; 
 }
 
+.acknowledgement{
+  float: left; position: relative;
+    color:#cacaca; 
+    margin-top:5%; 
+}
+
+
+}
 
 
 #slidecontainer {
