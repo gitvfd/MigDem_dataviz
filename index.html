@@ -14,7 +14,7 @@
 	<select class="selFilter" id="countryFilter" onchange="dataPicker()"></select></div> 
 	<br/>
 
-    <div class="col-md-2"><span class="headSelector-1">Net migration</span><br/>
+    <div class="col-md-2"><span class="headSelector-1" id='mig_scr'>Net migration</span><br/>
 
 	    <div class="col-md-2-1"><span class="headSelector">Native-born</span><br/>
 		<select class="selFilter"  id="var_migNativeFilter" onchange="dataPicker()"></select> </div> 
@@ -27,9 +27,9 @@
 
 	</div>
     
-    <div class="col-md-3"><span class="headSelector">Education trend</span><br/>
+    <div class="col-md-3"><span class="headSelector" id='edu_scr'>Education trend</span><br/>
 	<select class="selFilter"  id="var_eduFilter" onchange="dataPicker()"></select> </div> 
-    <div class="col-md-3"><span class="headSelector">Labour Force participation</span><br/>
+    <div class="col-md-3"><span class="headSelector"  id='lfrp_scr'>Labour Force participation</span><br/>
 	<select class="selFilter"  id="var_lfrpFilter" onchange="dataPicker()"></select></div> 
 </div>
 <div id="globalChart">
@@ -81,8 +81,27 @@
     <a href="http://www.oecd.org" target="_blank"><img  src="img/SYMBOL_20cm.png" ></img></a>
     <a href="https://ec.europa.eu/" target="_blank"><img  src="img/LOGO_CE_Vertical_EN_quadri_LR.png" ></img></a><span class="acknowledgement">Funded by the European Union Programme for Employment and Social Innovation "EaSI" (2014-2020)</span>
 </div>
+<div id="mig_scr_tooltip" class="hidden">
+	<span><i>Baseline migration:</i> Net migration rates for the 2016-2030 period are set to the level and age profile observed during the 2010-2015 period.<br/></span><br/>
+	<span><i>Zero migration:</i> All net migration rates for 2016-2030 are set to zero.<br/></span><br/>
+	<span><i>Low migration:</i> For a given population group (country, sex and origin), net migration rates by age for 2016-2030 are set to the baseline level, minus 30% of the absolute value of the total net migration rate of the cell.<br/></span><br/>
+	<span><i>High migration:</i> For a given population group (country, sex and origin), net migration rates by age for 2016-2030 are set to the baseline level, plus 30% of the absolute value of the total net migration rate of the cell.<br/></span><br/>
+</div>
+
+<div id="edu_scr_tooltip" class="hidden">
+	<span><i>Baseline education:</i> The distribution of education observed in 2015 is kept constant for all categories for the 2016-2030 period, although the whole distribution is aged over time.<br/></span><br/>
+	<span><i>Medium trend education:</i> The share of tertiary-educated among people aged 30-34 increases by 6 percentage points between 2015 and 2020. Between 2020 and 2030, the share of tertiary-educated among the 30-34 age group is assumed to increase by another 6 percentage points.<br/></span><br/>
+	<span><i>Low trend education:</i> The share of tertiary-educated in the 30-34 age group increases by 6 percentage points over the 2015-2030 period.<br/></span><br/>
+	<span><i>High trend education:</i> The share of tertiary-educated among people aged 30-34 increases by 6 percentage points between 2015 and 2020. Between 2020 and 2030, the share of tertiary-educated among the 30-34 age group is assumed to increase by 12 percentage points.<br/></span><br/>
+</div>
 
 
+<div id="lfrp_scr_tooltip" class="hidden">
+	<span><i>Baseline labour force participation:</i> The labour force participation rates observed in 2015, which are disaggregated by age group, gender, education and place of birth, are assumed to remain constant until 2030.<br/></span><br/>
+	<span><i> Gender convergence:</i> The participation gap between men and women is reduced for each group over the 2015-2030 period until it reaches zero in 2030, by increasing the labour force participation rate of the group with the lowest rate.<br/></span><br/>
+	<span><i>Origin convergence:</i> The participation gap between native-born and immigrants is reduced for each group over the 2015-2030 period until it reaches zero in 2030, by increasing the labour force participation rate of the group(s) with the lowest rate.<br/></span><br/>
+	<span><i>Gender and origin convergence:</i> This scenario combines the two variants outlined above, thus allowing to set both the gender gap and the gap between native-born and immigrants to zero by 2030.<br/></span>
+</div>
 <script src="libs/d3.v4.min.js"></script>
 <script src="js/dataPicker.js"></script>
 <script src="js/setFilters.js"></script>
@@ -390,7 +409,45 @@
 	         		}
 			})
 		})**/
+d3.select("#mig_scr")
+	.on("mouseover",function(){
 
+			var xPosition = d3.event.pageX+20;
+			var yPosition = d3.event.pageY+15;
+			d3.select("#mig_scr_tooltip")
+		        .style("left", xPosition + "px")
+		        .style("top", yPosition + "px") ;
+			d3.select("#mig_scr_tooltip").classed("hidden", false);	
+	})
+	.on("mouseout",function(){
+			d3.select("#mig_scr_tooltip").classed("hidden", true);	
+	})
+
+d3.select("#edu_scr")
+	.on("mouseover",function(){
+			var xPosition = d3.event.pageX+20;
+			var yPosition = d3.event.pageY+15;
+			d3.select("#edu_scr_tooltip")
+		        .style("left", xPosition + "px")
+		        .style("top", yPosition + "px") ;
+			d3.select("#edu_scr_tooltip").classed("hidden", false);	
+	})
+	.on("mouseout",function(){
+			d3.select("#edu_scr_tooltip").classed("hidden", true);	
+	})
+
+d3.select("#lfrp_scr")
+	.on("mouseover",function(){
+			var xPosition = d3.event.pageX+20;
+			var yPosition = d3.event.pageY+15;
+			d3.select("#lfrp_scr_tooltip")
+		        .style("left", xPosition + "px")
+		        .style("top", yPosition + "px") ;
+			d3.select("#lfrp_scr_tooltip").classed("hidden", false);	
+	})
+	.on("mouseout",function(){
+			d3.select("#lfrp_scr_tooltip").classed("hidden", true);	
+	})
 setupButtons()
 
 </script>
