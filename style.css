@@ -396,3 +396,27 @@ margin-left: 10%;
 text.shadow {
 text-shadow: 1px 1px 1px #979797;
 }
+
+#mig_scr,#edu_scr,#lfrp_scr  {
+    text-decoration:underline;
+}
+
+#mig_scr_tooltip,#edu_scr_tooltip,#lfrp_scr_tooltip {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background-color: rgb(252,252,252);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  max-width: 33%;
+}
+
+#mig_scr_tooltip.hidden, #edu_scr_tooltip.hidden, #lfrp_scr_tooltip.hidden{
+  display: none;
+}
